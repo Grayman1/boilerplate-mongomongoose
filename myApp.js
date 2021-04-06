@@ -31,10 +31,10 @@ const createAndSavePerson = (done) => {
     } else {
       done(null, data);
     }
-  })
-  
+  })  
 };
 
+/*
 // Challenge #4 code: Create Many Records with model.create()
 let arrayOfPeople = [
   {name:  "Joe", age:11, 
@@ -46,6 +46,8 @@ let arrayOfPeople = [
   {name:  "Eddie", age:10,     favoriteFoods: ["Chicken", "Burgers", "Pizza"]},
   {name:  "Jack", age:12, favoriteFoods: ["Burgers", "Beans", "hard-boiled eggs"]}
 ]
+*/
+
 
 const createManyPeople = (arrayOfPeople, done) => {
   Person.create(arrayOfPeople, (err, newPersons) => {
@@ -57,8 +59,9 @@ const createManyPeople = (arrayOfPeople, done) => {
   })
 };
 
-// Challenge #5 code: Use model.find() to Search Your Database
 /*
+// Challenge #5 code: Use model.find() to Search Your Database
+
 Person.find({name: "Eddie"}, (err, data) => {
   if(err) {
     console.log(err)
@@ -76,8 +79,7 @@ const findPeopleByName = (personName, done) => {
     console.log(data)
     done(null, data);
   }
-})
-  
+})  
 };
 
 
@@ -93,8 +95,8 @@ const findOneByFood = (food, done) => {
     done(null, data);
   }
 })
-  
 };
+
 
 // Challenge #7: Use model.findById() to Search Your Database By _id
 
@@ -106,9 +108,9 @@ const findPersonById = (personId, done) => {
     console.log(data)
     done(null, data);
   }
-})
-  
+})  
 };
+
 
 // Challenge #8 code: Perform Classic Updates by Running Find, Edit, then Save
 
@@ -132,13 +134,21 @@ const findEditThenSave = (personId, done) => {
 };
 
 
-
+// Challenge #9 code: Perform New Updates on a Document Using model.findOneAndUpdate()
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-
-  done(null /*, data*/);
+  Person.findOneAndUpdate({name: personName},{age: ageToSet},{new: true},(err, updatedRecord) => {
+      if(err) {
+    console.log(err)
+  } else {
+    done(null, updatedRecord)
+      }
+    })
 };
+
+// Challenge #10 code: Delete One Document Using model.findByIdAndRemove
+
 
 const removeById = (personId, done) => {
   done(null /*, data*/);
@@ -155,6 +165,8 @@ const queryChain = (done) => {
 
   done(null /*, data*/);
 };
+
+
 
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
