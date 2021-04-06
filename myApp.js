@@ -43,8 +43,8 @@ let arrayOfPeople = [
     favoriteFoods: ["Chicken", "Taki's", "Pizza"]},
   {name:  "Gui", age:12,
     favoriteFoods: ["Pork", "Pizza", "Pretzels"]},
-  {name:  "Eddie", age:57,     favoriteFoods: ["Chicken", "Burgers", "Pizza"]},
-  {name:  "Jack", age:57, favoriteFoods: ["Burgers", "Beans", "hard-boiled eggs"]}
+  {name:  "Eddie", age:10,     favoriteFoods: ["Chicken", "Burgers", "Pizza"]},
+  {name:  "Jack", age:12, favoriteFoods: ["Burgers", "Beans", "hard-boiled eggs"]}
 ]
 
 const createManyPeople = (arrayOfPeople, done) => {
@@ -57,10 +57,31 @@ const createManyPeople = (arrayOfPeople, done) => {
   })
 };
 
+// Challenge #5 code: Use model.find() to Search Your Database
+/*
+Person.find({name: "Eddie"}, (err, data) => {
+  if(err) {
+    console.log(err)
+  } else {
+    console.log(data)
+  }
+})
+*/
+// data is array of results
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find({name: personName}, (err, data) => {
+  if(err) {
+    console.log(err)
+  } else {
+    console.log(data)
+    done(null, data);
+  }
+})
+  
 };
 
+
+// Challenge #6 code: Use model.findOne() to Return a Single Matching Document from Your Database
 const findOneByFood = (food, done) => {
   done(null /*, data*/);
 };
