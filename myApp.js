@@ -17,10 +17,22 @@ const personSchema = new Schema({
 const Person = mongoose.model('Person', personSchema);
 
 
-
+// Challenge #3 code: Create and Save a Record of the Model
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  let fred = new Person({
+    name:  "Fred", 
+    age:57,
+    favoriteFoods: ["Beer", "Ale", "Pretzels"]
+  });
+  fred.save((err,data) => {
+    if(err) {
+      console.log(err)
+    } else {
+      done(null, data);
+    }
+  })
+  
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
