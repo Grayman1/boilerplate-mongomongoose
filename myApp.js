@@ -34,7 +34,7 @@ const createAndSavePerson = (done) => {
   })  
 };
 
-/*
+
 // Challenge #4 code: Create Many Records with model.create()
 let arrayOfPeople = [
   {name:  "Joe", age:11, 
@@ -46,7 +46,7 @@ let arrayOfPeople = [
   {name:  "Eddie", age:10,     favoriteFoods: ["Chicken", "Burgers", "Pizza"]},
   {name:  "Jack", age:12, favoriteFoods: ["Burgers", "Beans", "hard-boiled eggs"]}
 ]
-*/
+
 
 
 const createManyPeople = (arrayOfPeople, done) => {
@@ -161,18 +161,59 @@ const removeById = (personId, done) => {
 })  
 };
 
+// Challenge #11 code: Delete Many Documents with model.remove()
+
+
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
-
-  done(null /*, data*/);
+  Person.remove({name: nameToRemove}, (err, JSONStatus) => {
+    if(err) {
+      console.log(err)
+    } else {
+      done(null, JSONStatus)
+    }  
+  })
 };
+
+/*
+// Tutorial code
+Person.find({favoriteFoods: {$all: ['Pizza']}})
+  .sort({name: 'asc'})
+  .limit(4)
+  .select('name favoriteFoods')  // alternatively can exclude with '-age'
+  
+  .exec((err, data) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(data)
+    }
+  }
+  )
+*/
+
+// Challenge #12 code: Chain Search Query Helpers to Narrow Search Results
+
+
+
 
 const queryChain = (done) => {
   const foodToSearch = "burrito";
-
-  done(null /*, data*/);
-};
-
+  Person.find({favoriteFoods:  {$all: [foodToSearch]}})
+  .sort({name: 'asc'})
+  .limit(2)
+  .select('-age')  // alternatively can include with 'name favoriteFoods'
+  
+  .exec((err, data) => {
+      if (err) {
+          console.log(err)
+      }  else {
+          console.log(data)
+          done(null, data)
+        }
+    }
+  )
+}
 
 
 /** **Well Done !!**
