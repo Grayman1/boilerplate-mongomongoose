@@ -110,11 +110,29 @@ const findPersonById = (personId, done) => {
   
 };
 
+// Challenge #8 code: Perform Classic Updates by Running Find, Edit, then Save
+
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  Person.findById(personId, (err, data) => {
+  if(err) {
+    console.log(err)
+  } else {
+    //console.log(data)
+    data.favoriteFoods.push(foodToAdd)
+    data.save((err, updatedRecord) => {
+      if(err) {
+        console.log(err)
+      } else {
+        done(null, updatedRecord)
+      }
+    })
+  }
+  })
 };
+
+
+
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
