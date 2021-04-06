@@ -35,8 +35,26 @@ const createAndSavePerson = (done) => {
   
 };
 
+// Challenge #4 code: Create Many Records with model.create()
+let arrayOfPeople = [
+  {name:  "Joe", age:11, 
+  favoriteFoods: ["Chicken", "Taki's", "Smoothies"]},
+  {name:  "Luke", age:11,
+    favoriteFoods: ["Chicken", "Taki's", "Pizza"]},
+  {name:  "Gui", age:12,
+    favoriteFoods: ["Pork", "Pizza", "Pretzels"]},
+  {name:  "Eddie", age:57,     favoriteFoods: ["Chicken", "Burgers", "Pizza"]},
+  {name:  "Jack", age:57, favoriteFoods: ["Burgers", "Beans", "hard-boiled eggs"]}
+]
+
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  Person.create(arrayOfPeople, (err, newPersons) => {
+    if(err) {
+      console.log(err)
+    } else {
+      done(null, newPersons);
+    }  
+  })
 };
 
 const findPeopleByName = (personName, done) => {
