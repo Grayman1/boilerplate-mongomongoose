@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 // SET-UP MONGOOSE
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
+console.log('conn status:  '+mongoose.connection.readyState);
 
 //import mongoose from 'mongoose';
 const { Schema } = mongoose;
